@@ -1,0 +1,46 @@
+---
+name: Technical University of Berlin
+description: Technical University of Berlin public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/tu-berlin/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      TU Berlin has no unified developer portal. The confirmed public, machine-readable
+      API surface is the DepositOnce institutional repository (DSpace 8.1): its OAI-PMH
+      endpoint returned a valid Identify response and its REST/HAL API root returned a
+      HAL document reporting dspaceVersion "DSpace 8.1" — both live (HTTP 200). The
+      self-hosted GitLab instance (git.tu-berlin.de) is reachable but its API is gated:
+      /api/v4/version returned HTTP 401, requiring Shibboleth SSO. Authentication is
+      Shibboleth/SAML via the DFN-AAI federation (no public OAuth/OIDC IdP confirmed).
+      The library "APIs for Scientific Resources" page lists only external third-party
+      APIs (OECD, World Bank, IEEE Xplore, OpenAlex, etc.), not TU Berlin's own. Public
+      GitHub orgs TU-Berlin and TUUB exist. No endpoints were fabricated; every URL below
+      was probed live.
+    endpoints:
+      - url: https://api-depositonce.tu-berlin.de/server/oai/request?verb=Identify
+        status: 200
+        note: Valid OAI-PMH 2.0 Identify response, repository "DepositOnce", DSpace 8.1.
+      - url: https://api-depositonce.tu-berlin.de/server/api
+        status: 200
+        note: DSpace REST/HAL API root, dspaceVersion "DSpace 8.1", _links hypermedia.
+      - url: https://depositonce.tu-berlin.de/
+        status: 200
+        note: DepositOnce repository home (DSpace UI).
+      - url: https://git.tu-berlin.de/
+        status: 200
+        note: GitLab Enterprise Edition instance; login required.
+      - url: https://git.tu-berlin.de/api/v4/version
+        status: 401
+        note: GitLab REST API present but gated; requires authentication.
+      - url: https://github.com/TU-Berlin
+        status: 200
+        note: Public GitHub organization, ~29 repos (many migrated to GitLab).
+      - url: https://www.tu.berlin/en
+        status: 200
+        note: Official institutional website (English).
+      - url: https://www.tu.berlin/en/ub/search-borrow/search-for-papers-standards/free-online-resources/apis-for-scientific-resources
+        status: 200
+        note: Library guide listing external third-party APIs only, not TU Berlin's own.

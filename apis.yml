@@ -1,0 +1,96 @@
+---
+aid: tu-berlin
+name: Technical University of Berlin
+description: >-
+  Technische Universität Berlin (TU Berlin) is a public research university in
+  Berlin, Germany, ranked #66 in the QS World University Rankings 2025. Its
+  public developer/API footprint is concentrated in research-data and library
+  infrastructure rather than a unified developer portal. The institutional
+  repository DepositOnce runs on DSpace 8.1 and exposes a public OAI-PMH
+  interface and a public DSpace REST/HAL API for harvesting open-access
+  publications and research data. TU Berlin also operates a self-hosted GitLab
+  instance (git.tu-berlin.de) whose API is gated behind Shibboleth SSO, plus
+  public GitHub organizations (TU-Berlin, TUUB). Authentication across services
+  is provided via Shibboleth/SAML (DFN-AAI), operated by the ZECM.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/tu-berlin/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research Data
+  - Open Access
+  - Repository
+  - Library
+  - Germany
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: tu-berlin:depositonce-oai
+    name: DepositOnce OAI-PMH Interface
+    description: >-
+      Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH 2.0)
+      endpoint for DepositOnce, the institutional repository of TU Berlin. Allows
+      harvesting metadata for open-access publications and research data.
+      Returned a valid Identify response (DSpace 8.1, granularity
+      YYYY-MM-DDThh:mm:ssZ).
+    humanURL: https://depositonce.tu-berlin.de/info/help
+    baseURL: https://api-depositonce.tu-berlin.de/server/oai/request
+    tags: [ Research Data, Open Access, Repository, OAI-PMH, DSpace, Metadata ]
+    properties:
+      - type: Documentation
+        url: https://depositonce.tu-berlin.de/info/help
+  - aid: tu-berlin:depositonce-rest
+    name: DepositOnce DSpace REST API
+    description: >-
+      DSpace 8.1 REST/HAL API for the DepositOnce repository, exposing
+      communities, collections, items, bitstreams and discovery endpoints. The
+      API root returns a HAL document with dspaceVersion "DSpace 8.1" and an
+      _links hypermedia structure.
+    humanURL: https://depositonce.tu-berlin.de/info/help
+    baseURL: https://api-depositonce.tu-berlin.de/server/api
+    tags: [ Research Data, Open Access, Repository, REST, DSpace, HAL ]
+    properties:
+      - type: Documentation
+        url: https://depositonce.tu-berlin.de/info/help
+  - aid: tu-berlin:gitlab
+    name: TU Berlin GitLab API
+    description: >-
+      Self-hosted GitLab Enterprise Edition instance for TU Berlin. The GitLab
+      REST API (v4) is present but gated — unauthenticated requests to
+      /api/v4/ return HTTP 401. Login and API access require a TUB account via
+      Shibboleth Single Sign-On.
+    humanURL: https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on
+    baseURL: https://git.tu-berlin.de/api/v4
+    tags: [ Source Code, GitLab, Git, Gated, Authentication ]
+    properties:
+      - type: Documentation
+        url: https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on
+      - type: Authentication
+        url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+common:
+  - type: Website
+    url: https://www.tu.berlin/en
+  - type: GitHub
+    url: https://github.com/TU-Berlin
+  - type: SourceCode
+    url: https://github.com/TUUB
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/tu-berlin/
+  - type: Authentication
+    url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+  - type: Plans
+    url: plans/tu-berlin-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/tu-berlin-rate-limits.yml
+  - type: FinOps
+    url: finops/tu-berlin-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
