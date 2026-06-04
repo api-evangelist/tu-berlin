@@ -1,0 +1,14 @@
+{
+  "repo": "tu-berlin",
+  "feeds": [
+    {
+      "source": "https://www.tu.berlin/en/news",
+      "feed_url": "https://www.tu.berlin/en/news",
+      "title": "TU Berlin News",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

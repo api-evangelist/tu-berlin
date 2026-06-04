@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "tub": "https://www.tu.berlin/vocab#",
+    "@vocab": "https://www.tu.berlin/vocab#",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "Organization": "schema:Organization",
+    "sameAs": "schema:sameAs",
+    "logo": "schema:logo",
+    "foundingDate": "schema:foundingDate",
+    "address": "schema:address",
+    "department": "schema:department",
+    "api": {
+      "@id": "tub:api",
+      "@container": "@set"
+    },
+    "API": "tub:API",
+    "humanURL": {
+      "@id": "schema:documentation",
+      "@type": "@id"
+    },
+    "baseURL": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "DataCatalog": "schema:DataCatalog",
+    "Dataset": "schema:Dataset",
+    "ScholarlyArticle": "schema:ScholarlyArticle",
+    "repository": "tub:repository",
+    "DigitalDocument": "schema:DigitalDocument",
+    "SoftwareSourceCode": "schema:SoftwareSourceCode"
+  },
+  "@type": "CollegeOrUniversity",
+  "@id": "https://www.tu.berlin/",
+  "name": "Technische Universität Berlin",
+  "url": "https://www.tu.berlin/en",
+  "description": "Public research university in Berlin, Germany, with a public developer footprint concentrated in research-data and library infrastructure (DepositOnce DSpace repository, OAI-PMH, GitLab).",
+  "sameAs": [
+    "https://github.com/TU-Berlin",
+    "https://github.com/TUUB",
+    "https://www.linkedin.com/school/tu-berlin/"
+  ],
+  "api": [
+    {
+      "@type": "API",
+      "name": "DepositOnce OAI-PMH Interface",
+      "humanURL": "https://depositonce.tu-berlin.de/info/help",
+      "baseURL": "https://api-depositonce.tu-berlin.de/server/oai/request",
+      "repository": "DSpace 8.1"
+    },
+    {
+      "@type": "API",
+      "name": "DepositOnce DSpace REST API",
+      "humanURL": "https://depositonce.tu-berlin.de/info/help",
+      "baseURL": "https://api-depositonce.tu-berlin.de/server/api",
+      "repository": "DSpace 8.1"
+    },
+    {
+      "@type": "API",
+      "name": "TU Berlin GitLab API",
+      "humanURL": "https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on",
+      "baseURL": "https://git.tu-berlin.de/api/v4"
+    }
+  ]
+}
