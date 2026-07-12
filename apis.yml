@@ -73,6 +73,8 @@ apis:
       - type: Authentication
         url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
 common:
+  - type: DomainSecurity
+    url: security/tu-berlin-domain-security.yml
   - type: Website
     url: https://www.tu.berlin/en
   - type: GitHub
