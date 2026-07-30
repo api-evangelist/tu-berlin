@@ -13,9 +13,21 @@ description: >-
   public GitHub organizations (TU-Berlin, TUUB). Authentication across services
   is provided via Shibboleth/SAML (DFN-AAI), operated by the ZECM.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tu-berlin.png
 url: https://raw.githubusercontent.com/api-evangelist/tu-berlin/refs/heads/main/apis.yml
 tags:
   - Education
