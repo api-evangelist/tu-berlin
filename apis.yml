@@ -1,113 +1,324 @@
 ---
 aid: tu-berlin
 name: Technical University of Berlin
+x-type: university
+x-category: Technical University
 description: >-
-  Technische Universität Berlin (TU Berlin) is a public research university in
-  Berlin, Germany, ranked #66 in the QS World University Rankings 2025. Its
-  public developer/API footprint is concentrated in research-data and library
-  infrastructure rather than a unified developer portal. The institutional
-  repository DepositOnce runs on DSpace 8.1 and exposes a public OAI-PMH
-  interface and a public DSpace REST/HAL API for harvesting open-access
-  publications and research data. TU Berlin also operates a self-hosted GitLab
-  instance (git.tu-berlin.de) whose API is gated behind Shibboleth SSO, plus
-  public GitHub organizations (TU-Berlin, TUUB). Authentication across services
-  is provided via Shibboleth/SAML (DFN-AAI), operated by the ZECM.
+  Technische Universität Berlin (TU Berlin) is a public technical research university in
+  Berlin, Germany, and a member of the Berlin University Alliance and the TU9 alliance of
+  German institutes of technology. It operates no central developer portal, publishes no
+  OpenAPI, AsyncAPI or apis.json of its own, and sells no API product — its programmable
+  footprint is the set of standards-based endpoints its own IT units expose on its own
+  hosts, running third-party software. Confirmed live and unauthenticated: the DepositOnce
+  institutional repository (DSpace 9, OAI-PMH with 15 metadata formats, a REST/HAL API and
+  an OpenSearch description, minting DataCite DOIs under prefix 10.14279); a Shibboleth
+  SAML 2.0 Identity Provider whose federation metadata is public (entityID
+  https://ephraim.tu-berlin.de/shibboleth, DFN-AAI); a self-hosted GitLab whose REST v4
+  lists 2,851 public projects without credentials and which is its own OAuth2/OIDC
+  provider; a Matrix homeserver (Synapse) with the Client-Server API answering openly; and
+  ISIS, the institutional Moodle, acting as an LTI 1.3 platform with a public keyset.
+  Library discovery is an Ex Libris Primo tenant, not TU Berlin engineering. Nothing here
+  is an institution-authored contract, and none is claimed.
 type: Index
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
-  callable_host: false
+  commercial: false
+  callable_host: true
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: high
   source:
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - live probes of api-depositonce.tu-berlin.de, git.tu-berlin.de, matrix.tu-berlin.de,
+    shibboleth.tu-berlin.de, isis.tu-berlin.de
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
   onboarding: unknown
   trial: false
   try_now: false
-  public: false
+  public: true
   label: Free
   confidence: medium
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - live probes
+  generated: '2026-08-30'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tu-berlin.png
 url: https://raw.githubusercontent.com/api-evangelist/tu-berlin/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
+  - Technical University
+  - Germany
+  - Berlin
   - Research Data
   - Open Access
   - Repository
   - Library
-  - Germany
+  - Identity Federation
+  - Course Catalog
+  - Research Computing
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Every surface below was probed live and unauthenticated on 2026-08-30 from hosts under
+    TU Berlin's own registrable domains (tu.berlin, tu-berlin.de), and the profile is thin
+    by fact rather than by gap. TU Berlin authors no API contract: there is no OpenAPI,
+    AsyncAPI, apis.json, llms.txt (404 on www.tu.berlin) or security.txt (403), and no
+    developer portal exists to hold one. What it does operate is a set of standards-based
+    deployments of other people's software — DSpace 9, Shibboleth, GitLab, Synapse, Moodle
+    — so no openapi/ artifact is saved here: those products' generic specifications belong
+    to their vendors' own profiles, and saving one under this slug is exactly the
+    misattribution this pipeline exists to prevent. Two facts the June 2026 profile got
+    wrong are corrected: the GitLab API is NOT fully gated (public project and group
+    listings return 200 unauthenticated, 2,851 public projects) and DepositOnce now runs
+    DSpace 9.4, not 8.1. Library discovery was found to be an Ex Libris Primo tenant and
+    is recorded as tenant, not as TU Berlin's own.
+  evidence:
+  - url: https://api-depositonce.tu-berlin.de/server/oai/request?verb=Identify
+    status: 200
+  - url: https://api-depositonce.tu-berlin.de/server/api
+    status: 200
+  - url: https://shibboleth.tu-berlin.de/idp/shibboleth
+    status: 200
+  - url: https://git.tu-berlin.de/api/v4/projects?visibility=public
+    status: 200
+  - url: https://git.tu-berlin.de/.well-known/openid-configuration
+    status: 200
+  - url: https://matrix.tu-berlin.de/_matrix/client/versions
+    status: 200
+  - url: https://isis.tu-berlin.de/mod/lti/certs.php
+    status: 200
+  - url: https://tu-berlin.hosted.exlibrisgroup.com/primo-explore/search?tab=tub_all&vid=TUB
+    status: 200
+  - url: https://www.tu.berlin/llms.txt
+    status: 404
+  - url: https://www.tu.berlin/.well-known/security.txt
+    status: 403
+  checked: '2026-08-30'
 apis:
   - aid: tu-berlin:depositonce-oai
     name: DepositOnce OAI-PMH Interface
+    x-operator: institution
     description: >-
-      Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH 2.0)
-      endpoint for DepositOnce, the institutional repository of TU Berlin. Allows
-      harvesting metadata for open-access publications and research data.
-      Returned a valid Identify response (DSpace 8.1, granularity
-      YYYY-MM-DDThh:mm:ssZ).
+      Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH 2.0) endpoint for
+      DepositOnce, TU Berlin's institutional repository for publications and research data,
+      operated by the University Library on a TU Berlin host. Identify returns
+      repositoryName "DepositOnce", granularity YYYY-MM-DDThh:mm:ssZ and earliest
+      datestamp 1999-01-18. ListMetadataFormats advertises 15 prefixes (oai_dc, qdc, dim,
+      mods, mets, didl, ore, rdf, marc, etdms, rioxx, uketd_dc, xoai, oai_dc_unpaywall).
+      Records carry DataCite DOIs under the 10.14279 prefix. Fully open — no credential.
+      The protocol is OAI's and the software is DSpace's; the deployment and the metadata
+      are TU Berlin's.
     humanURL: https://depositonce.tu-berlin.de/info/help
     baseURL: https://api-depositonce.tu-berlin.de/server/oai/request
     tags: [ Research Data, Open Access, Repository, OAI-PMH, DSpace, Metadata ]
     properties:
       - type: Documentation
         url: https://depositonce.tu-berlin.de/info/help
+      - type: Conformance
+        url: conformance/tu-berlin-conformance.yml
   - aid: tu-berlin:depositonce-rest
     name: DepositOnce DSpace REST API
+    x-operator: institution
     description: >-
-      DSpace 8.1 REST/HAL API for the DepositOnce repository, exposing
-      communities, collections, items, bitstreams and discovery endpoints. The
-      API root returns a HAL document with dspaceVersion "DSpace 8.1" and an
-      _links hypermedia structure.
+      DSpace 9.4 REST/HAL API for DepositOnce, exposing communities, collections, items,
+      bitstreams, discovery, versioning, COAR Notify (ldnservices) and usage reports.
+      Anonymous access is genuinely partial and worth stating: the API root and
+      /discover/search/objects return 200 without a credential, while /core/items returns
+      401. An OpenSearch 1.1 description is served at /server/opensearch/service with atom
+      and rss result templates. No OpenAPI is published by TU Berlin for this surface, and
+      DSpace's own generic specification is deliberately not saved under this institution.
     humanURL: https://depositonce.tu-berlin.de/info/help
     baseURL: https://api-depositonce.tu-berlin.de/server/api
-    tags: [ Research Data, Open Access, Repository, REST, DSpace, HAL ]
+    tags: [ Research Data, Open Access, Repository, REST, DSpace, HAL, OpenSearch ]
     properties:
       - type: Documentation
         url: https://depositonce.tu-berlin.de/info/help
+      - type: OpenSearch
+        url: https://api-depositonce.tu-berlin.de/server/opensearch/service
+      - type: Authentication
+        url: authentication/tu-berlin-authentication.yml
+  - aid: tu-berlin:shibboleth-idp
+    name: TU Berlin Shibboleth Identity Provider (SAML 2.0 Metadata)
+    x-operator: institution
+    description: >-
+      The institution's own Shibboleth Identity Provider, operated by the ZECM and
+      registered in the DFN-AAI federation. Its SAML 2.0 metadata is public and
+      machine-readable — 15,920 bytes of XML declaring entityID
+      https://ephraim.tu-berlin.de/shibboleth, an IDPSSODescriptor with HTTP-Redirect,
+      HTTP-POST, POST-SimpleSign and Shibboleth AuthnRequest SSO bindings, SOAP logout and
+      an AttributeAuthorityDescriptor with SAML1/SAML2 AttributeQuery, all scoped to
+      tu-berlin.de. This is the one machine-readable surface a university operates by
+      definition, and it is entirely TU Berlin's.
+    humanURL: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+    baseURL: https://shibboleth.tu-berlin.de/idp/shibboleth
+    tags: [ Identity Federation, SAML, Shibboleth, DFN-AAI, Single Sign-On, Authentication ]
+    properties:
+      - type: Documentation
+        url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+      - type: Authentication
+        url: authentication/tu-berlin-authentication.yml
   - aid: tu-berlin:gitlab
     name: TU Berlin GitLab API
+    x-operator: institution
     description: >-
-      Self-hosted GitLab Enterprise Edition instance for TU Berlin. The GitLab
-      REST API (v4) is present but gated — unauthenticated requests to
-      /api/v4/ return HTTP 401. Login and API access require a TUB account via
-      Shibboleth Single Sign-On.
-    humanURL: https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on
+      Self-hosted GitLab Enterprise Edition for TU Berlin. Correcting the June 2026
+      profile, which recorded this API as fully gated: unauthenticated reads of public
+      resources succeed — GET /api/v4/projects returns 200 with X-Total 2851 and
+      /api/v4/groups returns 200 — while /api/v4/version, /api/v4/metadata and
+      /api/v4/mcp return 401. The instance is also its own OAuth 2.0 / OIDC provider:
+      /.well-known/openid-configuration returns 200 with PKCE S256 and 26 scopes,
+      including GitLab's mcp and ai_features scopes. Human login is brokered through
+      Shibboleth SSO. The API contract is GitLab's product contract; the deployment,
+      the projects and the token policy are TU Berlin's.
+    humanURL: https://git.tu-berlin.de/explore/projects
     baseURL: https://git.tu-berlin.de/api/v4
-    tags: [ Source Code, GitLab, Git, Gated, Authentication ]
+    tags: [ Source Code, GitLab, Git, OAuth, OpenID Connect, Authentication ]
     properties:
       - type: Documentation
         url: https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on
+      - type: WellKnown
+        url: well-known/tu-berlin-gitlab-openid-configuration.json
+      - type: OAuthScopes
+        url: scopes/tu-berlin-scopes.yml
+  - aid: tu-berlin:matrix
+    name: TU Berlin Matrix Homeserver (Client-Server API)
+    x-operator: institution
+    description: >-
+      TU Berlin runs its own Matrix homeserver for institutional messaging, with an Element
+      web client at chat.tu-berlin.de and documentation at docs.chat.tu-berlin.de. The
+      Client-Server API answers unauthenticated where the specification says it should:
+      /_matrix/client/versions returns 200 advertising r0.0.1 through v1.12,
+      /_matrix/federation/v1/version reports Synapse 1.157.2, /.well-known/matrix/client
+      returns the homeserver base URL and a Jitsi domain at meet.innocampus.tu-berlin.de,
+      and /_matrix/client/v3/login lists m.login.password and m.login.application_service.
+      Guest access is disabled. A genuine campus-life API surface, institution-operated,
+      speaking an open standard.
+    humanURL: https://docs.chat.tu-berlin.de/
+    baseURL: https://matrix.tu-berlin.de/_matrix/client
+    tags: [ Messaging, Matrix, Synapse, Campus Life, Federation ]
+    properties:
+      - type: Documentation
+        url: https://docs.chat.tu-berlin.de/
       - type: Authentication
-        url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+        url: authentication/tu-berlin-authentication.yml
+  - aid: tu-berlin:isis-lti
+    name: ISIS (Moodle) LTI 1.3 Platform
+    x-operator: institution
+    description: >-
+      ISIS is TU Berlin's central learning-management system, a Moodle instance on a TU
+      Berlin host. It acts as an LTI 1.3 platform: a public RS256 JWKS is served at
+      /mod/lti/certs.php (200, application/json), the OIDC launch endpoint /mod/lti/auth.php
+      returns 200, and /mod/lti/token.php is a POST-only client-credentials token endpoint.
+      The Moodle web-service API exists but is closed — /webservice/rest/server.php returns
+      an invalidtoken exception and tokens are issued only to TU Berlin accounts. LTI is a
+      named standard of the Kin Score education regime and this is a live conformance hit.
+    humanURL: https://isis.tu-berlin.de/
+    baseURL: https://isis.tu-berlin.de/mod/lti
+    tags: [ Learning Management, Moodle, LTI, Education, Interoperability ]
+    properties:
+      - type: Conformance
+        url: conformance/tu-berlin-conformance.yml
+      - type: Authentication
+        url: authentication/tu-berlin-authentication.yml
+  - aid: tu-berlin:tubcloud
+    name: tubCloud (Nextcloud) API
+    x-operator: institution
+    description: >-
+      tubCloud is TU Berlin's self-hosted Nextcloud file service, operated by the ZECM on a
+      TU Berlin host. Only the capability probe is public: /status.php returns 200 with
+      Nextcloud 32.0.9 Enterprise. The programmable surface — WebDAV, OCS and the Nextcloud
+      REST APIs — requires a TU Berlin account, so it is recorded as a real but fully gated
+      institutional surface rather than a public API.
+    humanURL: https://www.tu.berlin/campusmanagement
+    baseURL: https://tubcloud.tu-berlin.de
+    tags: [ File Storage, Nextcloud, WebDAV, Gated, Campus IT ]
+    properties:
+      - type: Documentation
+        url: https://www.tu.berlin/campusmanagement
+  - aid: tu-berlin:library-primo
+    name: University Library Discovery (Ex Libris Primo)
+    x-operator: tenant
+    description: >-
+      The University Library's discovery layer runs on Ex Libris Primo at
+      tu-berlin.hosted.exlibrisgroup.com — an institution-specific tenant on a vendor
+      platform, reached from the library pages at www.tu.berlin/ub. The holdings, the view
+      configuration and the patron relationship are TU Berlin's; the API and the contract
+      are Ex Libris'. Recorded as a tenant relationship so the institution is credited with
+      operating a discovery service without being credited with Ex Libris' engineering. No
+      Ex Libris specification is saved under this slug.
+    humanURL: https://www.tu.berlin/en/wm/bibliothek
+    baseURL: https://tu-berlin.hosted.exlibrisgroup.com/primo-explore
+    tags: [ Library, Discovery, Primo, Ex Libris, Tenant ]
+    properties:
+      - type: Documentation
+        url: https://www.tu.berlin/en/wm/bibliothek
 common:
-  - type: DomainSecurity
-    url: security/tu-berlin-domain-security.yml
   - type: Website
     url: https://www.tu.berlin/en
-  - type: GitHub
+  - type: Documentation
+    url: https://docs.chat.tu-berlin.de/
+  - type: Documentation
+    url: https://depositonce.tu-berlin.de/info/help
+  - type: GitHubOrganization
     url: https://github.com/TU-Berlin
+  - type: GitHubOrganization
+    url: https://github.com/tuub
   - type: SourceCode
-    url: https://github.com/TUUB
+    url: https://git.tu-berlin.de/explore/projects
   - type: LinkedIn
     url: https://www.linkedin.com/school/tu-berlin/
+  - type: Blog
+    url: https://blogs.tu-berlin.de/
+  - type: Support
+    url: https://www.tu.berlin/en/campusmanagement
+  - type: PrivacyPolicy
+    url: https://www.tu.berlin/en/data-protection
+  - type: IdentityFederation
+    url: https://shibboleth.tu-berlin.de/idp/shibboleth
+  - type: IdentityFederation
+    url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+  - type: ResearchRepository
+    url: https://depositonce.tu-berlin.de/
+  - type: LibraryCatalog
+    url: https://tu-berlin.hosted.exlibrisgroup.com/primo-explore/search?tab=tub_all&vid=TUB
+  - type: CourseCatalog
+    url: https://moseskonto.tu-berlin.de/moses/verzeichnis/index.html
+  - type: ResearchComputing
+    url: https://hpc.wiki.tu-berlin.de/
+  - type: AIPolicy
+    url: https://digit.zewk.wiki.tu-berlin.de/doku.php?id=ki:richtlinien
+  - type: AITooling
+    url: https://www.tu.berlin/en/wm/services/it-services-and-software/pilot-project-chatgpt-edu
   - type: Authentication
     url: https://www.tu.berlin/campusmanagement/angebot/shibboleth
+  - type: Authentication
+    url: authentication/tu-berlin-authentication.yml
+  - type: TermsOfService
+    url: https://www.tu.berlin/en/campusmanagement/about/legal-provisions
+  - type: StatusPage
+    url: https://www.tu.berlin/campusmanagement/angebot/aktueller-dienste-status
+  - type: Security
+    url: https://www.tu.berlin/en/campusmanagement/it-security
+  - type: ContentSignal
+    url: https://www.tu.berlin/robots.txt
+  - type: OAuthScopes
+    url: scopes/tu-berlin-scopes.yml
+  - type: Conformance
+    url: conformance/tu-berlin-conformance.yml
+  - type: WellKnown
+    url: well-known/tu-berlin-gitlab-openid-configuration.json
+  - type: DomainSecurity
+    url: security/tu-berlin-domain-security.yml
   - type: Plans
     url: plans/tu-berlin-plans-pricing.yml
   - type: RateLimits

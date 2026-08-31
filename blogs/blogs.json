@@ -3,13 +3,16 @@
   "feeds": [
     {
       "source": "https://www.tu.berlin/en/news",
-      "feed_url": "https://www.tu.berlin/en/news",
-      "title": "TU Berlin News",
-      "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "feed_url": "https://www.tu.berlin/en/news/feed.xml?feedid=2310613&cHash=9d364c069ae9bd43b078158dbf146d74",
+      "title": "",
+      "saved": 1,
+      "method": "discovered"
+    },
+    {
+      "source": "https://www.linkedin.com/school/tu-berlin/",
+      "error": "HTTPError"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-08-22T20:08:02Z"
+  "post_count": 1,
+  "fetched": "2026-08-30T22:33:40Z"
 }
