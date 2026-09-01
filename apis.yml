@@ -182,7 +182,19 @@ apis:
       the projects and the token policy are TU Berlin's.
     humanURL: https://git.tu-berlin.de/explore/projects
     baseURL: https://git.tu-berlin.de/api/v4
-    tags: [ Source Code, GitLab, Git, OAuth, OpenID Connect, Authentication ]
+    tags:
+    - Source Code
+    - GitLab
+    - Git
+    - Authentication
+    - OpenID Connect
+    tags_raw:
+    - Source Code
+    - GitLab
+    - Git
+    - OAuth
+    - OpenID Connect
+    - Authentication
     properties:
       - type: Documentation
         url: https://www.tu.berlin/en/campusmanagement/news-details/gitlab-anmeldung-mit-shibboleth-single-sign-on
