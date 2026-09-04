@@ -44,7 +44,7 @@ accessModel:
   - live probes
   generated: '2026-08-30'
   method: probed
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tu-berlin.png
 url: https://raw.githubusercontent.com/api-evangelist/tu-berlin/refs/heads/main/apis.yml
